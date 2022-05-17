@@ -14,6 +14,8 @@ fragment.appendChild(createNav());
 fragment.appendChild(createWelcomeCatalog());
 // insert books catalog into fragment
 fragment.appendChild(createBooksCatalog());
+// insert footer into fragment
+fragment.appendChild(createFooter());
 
 // insert fragment
 document.body.prepend(fragment);
@@ -244,4 +246,25 @@ function createBookElement(book) {
   wrapper.appendChild(bookInfo);
 
   return wrapper;
+}
+
+function createFooter() {
+  // create footer
+  const footerEl = document.createElement("footer");
+
+  const container = document.createElement("div");
+  container.classList.add("container");
+
+  const navLogo = document.createElement("div");
+  navLogo.id = "nav-logo";
+
+  const navLogoLink = document.createElement("a");
+  navLogoLink.href = "./index.html";
+  navLogoLink.innerText = "BOOKSHOP";
+
+  navLogo.appendChild(navLogoLink);
+  container.appendChild(navLogo);
+  footerEl.appendChild(container);
+
+  return footerEl;
 }
