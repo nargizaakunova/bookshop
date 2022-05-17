@@ -101,6 +101,7 @@ nav a.cart span small {
   font-family: "Montserrat";
   font-size: 18px;
   line-height: 1.5;
+  letter-spacing: 1px;
   color: var(--grey-middle);
 }
 /* Product description ends here */
@@ -109,7 +110,7 @@ nav a.cart span small {
   margin-top: 80px;
   margin-bottom: 60px;
 }
-.books .books-grid {
+.books .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 40px;
@@ -117,27 +118,27 @@ nav a.cart span small {
   text-align: center;
 }
 @media only screen and (min-width: 481px) and (max-width: 961px) {
-  .books .books-grid {
+  .books .container {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 10px;
   }
 }
 @media (max-width: 480px) {
-  .books .books-grid {
+  .books .container {
     grid-template-columns: 1fr;
   }
 }
-.books .books-grid .book img {
+.books .container .book img {
   width: 200px;
 }
-.books .books-grid .book {
+.books .container .book {
   cursor: pointer;
 }
-.books .books-grid .book-img {
+.books .container .book-img {
   position: relative;
   overflow: hidden;
 }
-.books .books-grid .book-actions {
+.books .container .book-actions {
   position: absolute;
   bottom: 0;
   left: -2px;
@@ -146,9 +147,10 @@ nav a.cart span small {
   background: var(--white-color);
   transform: translateY(100%) translateZ(0);
 }
-.books .books-grid .book:hover .book-actions {
+.books .container .book:hover .book-actions {
   transform: translateY(0%) translateZ(0);
   transition: transform 0.2s ease-in-out;
+  padding-top: 5px;
 }
 .book-actions .btn {
   margin-right: 12px;
@@ -173,11 +175,8 @@ nav a.cart span small {
   letter-spacing: 2px;
   transition: all 0.5ms;
 }
-.book .book-info p:hover {
-  letter-spacing: 2px;
-  font-weight: 600;
+.book .book-info p:last-child:hover {
   color: var(--black-color);
-  text-transform: uppercase;
 }
 /* Books grid ends here */
 /* Footer starts here */
