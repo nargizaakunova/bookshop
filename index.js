@@ -201,6 +201,9 @@ function createBookElement(book) {
 
   const bookImg = document.createElement("img");
   bookImg.src = book.imageLink;
+  bookImg.onclick = () => {
+    showBookModal(book);
+  };
 
   const bookActions = document.createElement("div");
   bookActions.classList.add("book-actions");
@@ -208,6 +211,10 @@ function createBookElement(book) {
   const linkShowMore = document.createElement("a");
   linkShowMore.classList.add("btn", "show-more");
   linkShowMore.href = "#";
+  linkShowMore.onclick = (e) => {
+    e.preventDefault();
+    showBookModal(book);
+  };
 
   const iconShowMore = document.createElement("i");
   iconShowMore.classList.add("fa", "fa-eye");
@@ -267,4 +274,69 @@ function createFooter() {
   footerEl.appendChild(container);
 
   return footerEl;
+}
+
+function createModalWindow(contentEl) {
+  // create modal window
+  const modalWindow = document.createElement("div");
+  modalWindow.id = "modal-window";
+
+  const closeModalBtnLink = document.createElement("a");
+  closeModalBtnLink.classList.add("close-modal-btn");
+  closeModalBtnLink.onclick = (e) => {
+    e.preventDefault();
+    closeModal();
+  };
+
+  const closeModalBtnIcon = document.createElement("i");
+  closeModalBtnIcon.classList.add("fa-solid", "fa-xmark");
+
+  const modalBody = document.createElement("div");
+  modalBody.classList.add("modal-body");
+  modalBody.appendChild(contentEl);
+
+  closeModalBtnLink.appendChild(closeModalBtnIcon);
+  modalWindow.appendChild(closeModalBtnLink);
+  modalWindow.appendChild(modalBody);
+  return modalWindow;
+}
+
+function createModalBackdrop() {
+  const modalBackdrop = document.createElement("div");
+  modalBackdrop.id = "modal-backdrop";
+  modalBackdrop.onclick = () => {
+    closeModal();
+  };
+  return modalBackdrop;
+}
+
+function showModal(content) {
+  document.body.appendChild(createModalWindow(content));
+  document.body.appendChild(createModalBackdrop());
+  document.body.classList.add("modal-open");
+}
+
+function showBookModal(book) {
+  const content = document.createElement("div");
+  content.innerText = book.description;
+  showModal(content);
+}
+
+function closeModal() {
+  const modalWindow = document.getElementById("modal-window");
+  if (modalWindow) {
+    modalWindow.remove();
+  }
+  const modalBackdrop = document.getElementById("modal-backdrop");
+  if (modalBackdrop) {
+    modalBackdrop.remove();
+  }
+  document.body.classList.remove("modal-open");
+}
+
+// create sidebar for bag books
+function createSidebarWindow() {
+  // create sidebar
+  const sidebarWindow = document.createElement("div");
+  // sidebarWindow.id =
 }

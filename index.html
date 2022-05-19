@@ -20,103 +20,52 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- decrease increase form buttons  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
     <script src="index.js" defer></script>
     <title>Book Shop</title>
   </head>
 
   <body>
-    <!-- FORM ORDER starts here -->
-    <div class="wrapper hidden">
-      <div class="form-container">
-        <form action="">
-          <h2>
-            <i class="fas fa-shipping-fast"></i>
-            Order Form
-          </h2>
-          <div class="name">
-            <div>
-              <label for="f-name">First</label>
-              <input type="text" name="f-name" minlength="4" />
-            </div>
-            <div>
-              <label for="l-name">Last</label>
-              <input type="text" name="l-name" minlength="5" />
-            </div>
-          </div>
-          <div class="delivery-date">
-            <div>
-              <label for="d-date">Delivery Date</label>
-              <input type="date" name="d-date" />
-            </div>
-          </div>
-          <div class="street">
-            <label for="name">Street</label>
-            <input type="text" name="address" minlength="5" />
-          </div>
-          <div class="address-info">
-            <div>
-              <label for="flat">Flat</label>
-              <input type="number" name="flat" />
-            </div>
-            <div>
-              <label for="house">House</label>
-              <input type="number" name="house" />
+    <div id="sidebar-window">
+      <a href="#" class="close-modal-btn"><i class="fa-solid fa-xmark"></i></a>
+      <div class="products">
+        <div class="product-item">
+          <div class="summary-info">
+            <p>JavaScript: The Good Parts: The Good Parts</p>
+            <p>by Douglas Crockford</p>
+            <p>Price: $30</p>
+            <div class="number-input">
+              <button
+                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                class="minus"
+              ></button>
+              <input
+                class="quantity"
+                min="1"
+                name="quantity"
+                value="1"
+                type="number"
+              />
+              <button
+                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                class="plus"
+              ></button>
             </div>
           </div>
 
-          <fieldset>
-            <legend>Choose the payment type</legend>
-
-            <div class="form__radios">
-              <div class="form__radio">
-                <label for="cash">Cash</label>
-                <input id="cash" name="payment-method" type="radio" />
-              </div>
-
-              <div class="form__radio">
-                <label for="card">Card</label>
-                <input checked id="card" name="payment-method" type="radio" />
-              </div>
-            </div>
-          </fieldset>
-
-          <!-- Gifts -->
-          <p>Choose 2 gifts: (optional)</p>
-          <div class="gifts-grid">
-            <div class="card__group">
-              <div class="card">
-                <input class="custom" type="checkbox" id="check1" />
-                <label for="check1">
-                  <p>Pack as a gift</p>
-                </label>
-              </div>
-              <div class="card">
-                <input class="custom" type="checkbox" id="check2" />
-                <label for="check2">
-                  <p>Add postcard</p>
-                </label>
-              </div>
-              <div class="card">
-                <input class="custom" type="checkbox" id="check3" />
-                <label for="check3">
-                  <p>Provide 2% discount to the next time</p>
-                </label>
-              </div>
-              <div class="card">
-                <input class="custom" type="checkbox" id="check4" />
-                <label for="check4">
-                  <p>Branded pen or pencil</p>
-                </label>
-              </div>
-            </div>
-          </div>
-          <!-- Gifts end here -->
-          <div class="btns">
-            <button>Complete</button>
-          </div>
-        </form>
+          <button class="remove-btn">Remove</button>
+        </div>
+      </div>
+      <div class="checkout">
+        <h3 class="total-price">Total: $120</h3>
+        <button class="order-btn">Order</button>
       </div>
     </div>
-    <!-- FORM ORDER ends here -->
   </body>
 </html>
