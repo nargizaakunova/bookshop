@@ -43,7 +43,7 @@ function createNav() {
   shoppingCartLink.classList.add("cart");
   shoppingCartLink.href = "#";
   shoppingCartLink.onclick = () => {
-    showSidebarWindow();
+    renderSidebarWindow();
   };
 
   const shoppingCartLinkSpan = document.createElement("span");
@@ -266,7 +266,7 @@ function createBookElement(book) {
 
 function addBook(book) {
   selectedBooks.push(book);
-  showSidebarWindow();
+  renderSidebarWindow();
   updateBagQuantity();
 }
 
@@ -423,6 +423,7 @@ function createSidebarWindow(selectedBooks) {
         selectedBooks.splice(foundBookIndex, 1);
       }
       updateBagQuantity();
+      renderSidebarWindow();
     };
 
     const quantityNumber = document.createElement("input");
@@ -438,6 +439,7 @@ function createSidebarWindow(selectedBooks) {
       stepUpBtn.parentNode.querySelector("input[type=number]").stepUp();
       selectedBooks.push(book);
       updateBagQuantity();
+      renderSidebarWindow();
     };
 
     const removeBtn = document.createElement("button");
@@ -450,7 +452,7 @@ function createSidebarWindow(selectedBooks) {
           i--;
         }
       }
-      showSidebarWindow();
+      renderSidebarWindow();
       updateBagQuantity();
     };
 
@@ -470,8 +472,12 @@ function createSidebarWindow(selectedBooks) {
   checkoutBlock.classList.add("checkout");
 
   const totalPrice = document.createElement("h3");
+  let price = 0;
+  for (const [book, quantity] of uniqueBooks) {
+    price += book.price * quantity;
+  }
   totalPrice.classList.add("total-price");
-  totalPrice.innerHTML = "Total: $120";
+  totalPrice.innerHTML = `Total: $${price}`;
 
   const orderBtn = document.createElement("button");
   orderBtn.classList.add("order-btn");
@@ -490,11 +496,11 @@ function createSidebarWindow(selectedBooks) {
   return sidebarWindow;
 }
 
-function showSidebarWindow() {
+function renderSidebarWindow() {
   const previousSidebar = document.getElementById("sidebar-window");
   if (previousSidebar) {
-    previousSidebar.remove();
+    previousSidebar.replaceWith(createSidebarWindow(selectedBooks));
+  } else {
+    document.body.appendChild(createSidebarWindow(selectedBooks));
   }
-
-  document.body.appendChild(createSidebarWindow(selectedBooks));
 }
