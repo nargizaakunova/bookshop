@@ -224,6 +224,8 @@ footer #nav-logo a:hover {
 }
 
 .form-container {
+  width: 75%;
+  padding: 5% 10%;
   margin-top: 5%;
   margin-bottom: 5%;
   display: flex;
@@ -231,11 +233,6 @@ footer #nav-logo a:hover {
   font-family: "Montserrat", Arial, sans-serif;
   background: linear-gradient(30deg, #ffffff, #d1c286ec);
   box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
-}
-
-.form-container {
-  width: 75%;
-  padding: 5% 10%;
 }
 
 h2 {
@@ -283,6 +280,17 @@ form h2 {
 
 form h2:nth-of-type(2) {
   margin-top: 10%;
+}
+
+.field-invalid label {
+  color: red;
+}
+.field-invalid input {
+  border: 1px solid red;
+}
+.error-msg {
+  color: red;
+  font-size: 12px;
 }
 
 .name {
@@ -373,7 +381,7 @@ button:focus {
     text-align: center;
   }
 
-  input {
+  form input {
     margin: 5px 0;
     min-height: 30px;
   }
@@ -394,17 +402,17 @@ legend {
   color: var(--grey-dark);
 }
 
-.form__radios {
+.form-radios {
   display: flex;
 }
 
-.form__radio {
+.form-radio {
   margin: auto;
   text-align: center;
 }
 
 /* Gifts */
-.card__group {
+.card-group {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
@@ -417,7 +425,7 @@ legend {
   .form-container {
     margin: 0;
   }
-  .card__group {
+  .card-group {
     grid-template-columns: 1fr;
     row-gap: 10px;
   }

@@ -20,6 +20,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="./form.js" defer></script>
     <title>Book Shop</title>
   </head>
 
@@ -35,46 +36,82 @@
           <div class="name">
             <div>
               <label for="f-name">First</label>
-              <input type="text" name="f-name" minlength="4" />
+              <input
+                type="text"
+                name="f-name"
+                onchange="updateField('firstName', event)"
+              />
             </div>
             <div>
               <label for="l-name">Last</label>
-              <input type="text" name="l-name" minlength="5" />
+              <input
+                type="text"
+                name="l-name"
+                onchange="updateField('lastName', event)"
+              />
             </div>
           </div>
           <div class="delivery-date">
             <div>
               <label for="d-date">Delivery Date</label>
-              <input type="date" name="d-date" />
+              <input
+                type="date"
+                name="d-date"
+                onchange="updateField('date', event)"
+              />
             </div>
           </div>
           <div class="street">
             <label for="name">Street</label>
-            <input type="text" name="address" minlength="5" />
+            <input
+              type="text"
+              name="address"
+              onchange="updateField('street', event)"
+            />
           </div>
           <div class="address-info">
             <div>
               <label for="flat">Flat</label>
-              <input type="number" name="flat" />
+              <input
+                type="number"
+                name="flat"
+                onchange="updateField('flat', event)"
+              />
             </div>
             <div>
               <label for="house">House</label>
-              <input type="number" name="house" />
+              <input
+                type="number"
+                name="house"
+                onchange="updateField('house', event)"
+              />
             </div>
           </div>
 
           <fieldset>
             <legend>Choose the payment type</legend>
 
-            <div class="form__radios">
-              <div class="form__radio">
+            <div class="form-radios">
+              <div class="form-radio">
                 <label for="cash">Cash</label>
-                <input id="cash" name="payment-method" type="radio" />
+                <input
+                  id="cash"
+                  name="payment-method"
+                  type="radio"
+                  value="cash"
+                  onchange="updateField('paymentMethod', event)"
+                />
               </div>
 
-              <div class="form__radio">
+              <div class="form-radio">
                 <label for="card">Card</label>
-                <input checked id="card" name="payment-method" type="radio" />
+                <input
+                  id="card"
+                  name="payment-method"
+                  type="radio"
+                  value="card"
+                  onchange="updateField('paymentMethod', event)"
+                />
               </div>
             </div>
           </fieldset>
@@ -82,27 +119,55 @@
           <!-- Gifts -->
           <p>Choose 2 gifts: (optional)</p>
           <div class="gifts-grid">
-            <div class="card__group">
+            <div class="card-group">
               <div class="card">
-                <input class="custom" type="checkbox" id="check1" />
+                <input
+                  name="gifts"
+                  value="gift1"
+                  class="custom"
+                  type="checkbox"
+                  id="check1"
+                  onchange="updateField('gifts', event)"
+                />
                 <label for="check1">
                   <p>Pack as a gift</p>
                 </label>
               </div>
               <div class="card">
-                <input class="custom" type="checkbox" id="check2" />
+                <input
+                  name="gifts"
+                  value="gift2"
+                  class="custom"
+                  type="checkbox"
+                  id="check2"
+                  onchange="updateField('gifts', event)"
+                />
                 <label for="check2">
                   <p>Add postcard</p>
                 </label>
               </div>
               <div class="card">
-                <input class="custom" type="checkbox" id="check3" />
+                <input
+                  name="gifts"
+                  value="gift3"
+                  class="custom"
+                  type="checkbox"
+                  id="check3"
+                  onchange="updateField('gifts', event)"
+                />
                 <label for="check3">
                   <p>Provide 2% discount to the next time</p>
                 </label>
               </div>
               <div class="card">
-                <input class="custom" type="checkbox" id="check4" />
+                <input
+                  name="gifts"
+                  value="gift4"
+                  class="custom"
+                  type="checkbox"
+                  id="check4"
+                  onchange="updateField('gifts', event)"
+                />
                 <label for="check4">
                   <p>Branded pen or pencil</p>
                 </label>
@@ -111,7 +176,7 @@
           </div>
           <!-- Gifts end here -->
           <div class="btns">
-            <button>Complete</button>
+            <button type="submit">Complete</button>
           </div>
         </form>
       </div>
