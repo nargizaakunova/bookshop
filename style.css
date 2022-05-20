@@ -527,6 +527,25 @@ legend {
   color: var(--grey-dark);
   font-family: "Montserrat";
 }
+
+@media only screen and (min-width: 481px) and (max-width: 961px) {
+  #sidebar-window {
+    width: 50%;
+  }
+}
+
+@media (max-width: 736px) {
+  #sidebar-window {
+    width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  #sidebar-window {
+    width: 100%;
+  }
+}
+
 #sidebar-window .close-modal-btn {
   margin-left: auto;
   margin-bottom: 10px;
