@@ -225,6 +225,7 @@ footer #nav-logo a:hover {
 
 .form-container {
   margin-top: 5%;
+  margin-bottom: 5%;
   display: flex;
   justify-content: center;
   font-family: "Montserrat", Arial, sans-serif;
