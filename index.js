@@ -42,6 +42,9 @@ function createNav() {
   const shoppingCartLink = document.createElement("a");
   shoppingCartLink.classList.add("cart");
   shoppingCartLink.href = "#";
+  shoppingCartLink.onclick = () => {
+    showSidebarWindow();
+  };
 
   const shoppingCartLinkSpan = document.createElement("span");
 
@@ -473,6 +476,9 @@ function createSidebarWindow(selectedBooks) {
   const orderBtn = document.createElement("button");
   orderBtn.classList.add("order-btn");
   orderBtn.innerText = "Order";
+  orderBtn.onclick = () => {
+    window.open("./form.html", "_blank");
+  };
 
   closeModalBtnLink.appendChild(closeModalBtnIcon);
   checkoutBlock.appendChild(totalPrice);
