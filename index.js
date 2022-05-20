@@ -43,7 +43,11 @@ function createNav() {
   shoppingCartLink.classList.add("cart");
   shoppingCartLink.href = "#";
   shoppingCartLink.onclick = () => {
-    renderSidebarWindow();
+    if (isSidebarOpen()) {
+      closeSidebarWindow();
+    } else {
+      renderSidebarWindow();
+    }
   };
 
   const shoppingCartLinkSpan = document.createElement("span");
@@ -357,6 +361,15 @@ function closeSidebarWindow() {
   const sidebarWindow = document.getElementById("sidebar-window");
   if (sidebarWindow) {
     sidebarWindow.remove();
+  }
+}
+
+function isSidebarOpen() {
+  const sidebarWindow = document.getElementById("sidebar-window");
+  if (sidebarWindow) {
+    return true;
+  } else {
+    return false;
   }
 }
 
