@@ -234,7 +234,7 @@ footer #nav-logo a:hover {
 }
 
 .form-container {
-  width: 65%;
+  width: 75%;
   padding: 5% 10%;
 }
 
@@ -333,7 +333,7 @@ button:focus {
   outline: none;
 }
 
-@media (max-width: 736px) {
+@media (max-width: 800px) {
   .wrapper {
     width: 75%;
   }
@@ -411,6 +411,12 @@ legend {
 }
 
 @media only screen and (max-width: 480px) {
+  .wrapper {
+    width: 100%;
+  }
+  .form-container {
+    margin: 0;
+  }
   .card__group {
     grid-template-columns: 1fr;
     row-gap: 10px;
