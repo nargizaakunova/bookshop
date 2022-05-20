@@ -7,6 +7,7 @@ fetch("./books.json") //path to the file with json data
   });
 
 const fragment = new DocumentFragment();
+const selectedBooks = [];
 
 // insert navigation into fragment
 fragment.appendChild(createNav());
@@ -45,6 +46,7 @@ function createNav() {
   const shoppingCartLinkSpan = document.createElement("span");
 
   const shoppingCartLinkSpanSmall = document.createElement("small");
+  shoppingCartLinkSpanSmall.id = "bag-quantity";
   shoppingCartLinkSpanSmall.innerText = "0";
 
   const shoppingCartLinkSpanIcon = document.createElement("i");
@@ -222,6 +224,10 @@ function createBookElement(book) {
   const linkAddToBag = document.createElement("a");
   linkAddToBag.classList.add("btn", "add-to-bag");
   linkAddToBag.href = "#";
+  linkAddToBag.onclick = (e) => {
+    addBook(book);
+    e.preventDefault();
+  };
 
   const iconAddToBag = document.createElement("i");
   iconAddToBag.classList.add("fa-solid", "fa-shopping-cart");
@@ -253,6 +259,16 @@ function createBookElement(book) {
   wrapper.appendChild(bookInfo);
 
   return wrapper;
+}
+
+function addBook(book) {
+  selectedBooks.push(book);
+  showSidebarWindow();
+  updateBagQuantity();
+}
+
+function updateBagQuantity() {
+  document.getElementById("bag-quantity").innerText = `${selectedBooks.length}`;
 }
 
 function createFooter() {
@@ -334,9 +350,145 @@ function closeModal() {
   document.body.classList.remove("modal-open");
 }
 
+function closeSidebarWindow() {
+  const sidebarWindow = document.getElementById("sidebar-window");
+  if (sidebarWindow) {
+    sidebarWindow.remove();
+  }
+}
+
 // create sidebar for bag books
-function createSidebarWindow() {
+function createSidebarWindow(selectedBooks) {
   // create sidebar
   const sidebarWindow = document.createElement("div");
-  // sidebarWindow.id =
+  sidebarWindow.id = "sidebar-window";
+
+  const closeModalBtnLink = document.createElement("a");
+  closeModalBtnLink.classList.add("close-sidebar-btn");
+  closeModalBtnLink.onclick = (e) => {
+    e.preventDefault();
+    closeSidebarWindow();
+  };
+
+  const closeModalBtnIcon = document.createElement("i");
+  closeModalBtnLink.classList.add("fa-solid", "fa-xmark");
+
+  const products = document.createElement("div");
+  products.classList.add("products");
+
+  // grouping books
+  // from: [book1, book1, book2, book3]
+  // to: {
+  //   book1: 2
+  //   book2: 1,
+  //   book3: 1
+  // }
+  const uniqueBooks = new Map();
+  for (const selectedBook of selectedBooks) {
+    if (uniqueBooks.get(selectedBook)) {
+      uniqueBooks.set(selectedBook, uniqueBooks.get(selectedBook) + 1);
+    } else {
+      uniqueBooks.set(selectedBook, 1);
+    }
+  }
+
+  for (const [book, quantity] of uniqueBooks) {
+    const productItem = document.createElement("div");
+    productItem.classList.add("product-item");
+
+    const summaryInfo = document.createElement("div");
+    summaryInfo.classList.add("summary-info");
+
+    const bookTitle = document.createElement("p");
+    bookTitle.innerText = `${book.title}`;
+
+    const authorName = document.createElement("p");
+    authorName.innerText = `by ${book.author}`;
+
+    const price = document.createElement("p");
+    price.innerText = `Price: $${book.price}`;
+
+    const numberInput = document.createElement("div");
+    numberInput.classList.add("number-input");
+
+    const stepDownBtn = document.createElement("button");
+    stepDownBtn.classList.add("minus");
+    stepDownBtn.onclick = () => {
+      stepDownBtn.parentNode.querySelector("input[type=number]").stepDown();
+      const foundBookIndex = selectedBooks.findIndex((item) => item === book);
+      if (foundBookIndex !== -1) {
+        selectedBooks.splice(foundBookIndex, 1);
+      }
+      updateBagQuantity();
+    };
+
+    const quantityNumber = document.createElement("input");
+    quantityNumber.classList.add("quantity");
+    quantityNumber.min = "1";
+    quantityNumber.name = "quantity";
+    quantityNumber.value = quantity;
+    quantityNumber.type = "number";
+
+    const stepUpBtn = document.createElement("button");
+    stepUpBtn.classList.add("plus");
+    stepUpBtn.onclick = () => {
+      stepUpBtn.parentNode.querySelector("input[type=number]").stepUp();
+      selectedBooks.push(book);
+      updateBagQuantity();
+    };
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove-btn");
+    removeBtn.innerText = "Remove";
+    removeBtn.onclick = () => {
+      for (let i = 0; i < selectedBooks.length; i++) {
+        if (selectedBooks[i] === book) {
+          selectedBooks.splice(i, 1);
+          i--;
+        }
+      }
+      showSidebarWindow();
+      updateBagQuantity();
+    };
+
+    summaryInfo.appendChild(bookTitle);
+    summaryInfo.appendChild(authorName);
+    summaryInfo.appendChild(price);
+    summaryInfo.appendChild(numberInput);
+    numberInput.appendChild(stepDownBtn);
+    numberInput.appendChild(quantityNumber);
+    numberInput.appendChild(stepUpBtn);
+    productItem.appendChild(summaryInfo);
+    productItem.appendChild(removeBtn);
+    products.appendChild(productItem);
+  }
+
+  const checkoutBlock = document.createElement("div");
+  checkoutBlock.classList.add("checkout");
+
+  const totalPrice = document.createElement("h3");
+  totalPrice.classList.add("total-price");
+  totalPrice.innerHTML = "Total: $120";
+
+  const orderBtn = document.createElement("button");
+  orderBtn.classList.add("order-btn");
+  orderBtn.innerText = "Order";
+
+  closeModalBtnLink.appendChild(closeModalBtnIcon);
+  checkoutBlock.appendChild(totalPrice);
+  checkoutBlock.appendChild(orderBtn);
+  sidebarWindow.appendChild(closeModalBtnLink);
+  sidebarWindow.appendChild(products);
+  sidebarWindow.appendChild(checkoutBlock);
+
+  return sidebarWindow;
+}
+
+function showSidebarWindow() {
+  const previousSidebar = document.getElementById("sidebar-window");
+  if (previousSidebar) {
+    previousSidebar.remove();
+  }
+
+  document.body.appendChild(createSidebarWindow(selectedBooks));
 }

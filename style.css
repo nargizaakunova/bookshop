@@ -81,6 +81,8 @@ nav a.cart span small {
   font-family: "Montserrat";
   font-size: 9px;
   letter-spacing: 0.5px;
+  min-width: 18px;
+  text-align: center;
 }
 /* Navigation ends here */
 /* Product description */
