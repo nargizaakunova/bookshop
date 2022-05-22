@@ -12,10 +12,11 @@ const form = {
 
 const validations = {
   firstName(value) {
+    console.log(value);
     if (value.length < 4) {
       return false;
     }
-    if (/[^A-Za-z]/.test(value)) {
+    if (/[^A-Za-z ]/.test(value)) {
       return false;
     }
 
@@ -27,7 +28,7 @@ const validations = {
     if (value.length < 5) {
       return false;
     }
-    if (/[^A-Za-z]/.test(value)) {
+    if (/[^A-Za-z ]/.test(value)) {
       return false;
     }
 
@@ -56,10 +57,7 @@ const validations = {
   },
 
   flat(value) {
-    if (value < 0) {
-      return false;
-    }
-    if (/[^0-9-]/.test(value)) {
+    if (!/^[0-9]+(-[0-9]+)*?$/.test(value)) {
       return false;
     }
 
@@ -67,10 +65,7 @@ const validations = {
   },
 
   house(value) {
-    if (value < 0) {
-      return false;
-    }
-    if (/[^0-9]/.test(value)) {
+    if (!/^[0-9]+(-[0-9]+)*?$/.test(value)) {
       return false;
     }
 
