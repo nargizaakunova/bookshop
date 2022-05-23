@@ -476,7 +476,8 @@ function sidebarCloseHandler(e) {
   console.log("I was called");
   if (
     !e.target.closest(".shopping-cart") &&
-    !e.target.closest("#sidebar-window")
+    !e.target.closest("#sidebar-window") &&
+    !e.target.closest(".add-to-bag")
   ) {
     closeSidebarWindow();
   }
