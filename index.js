@@ -131,7 +131,9 @@ function createBookElement(book) {
   const bookImg = document.createElement("img");
   bookImg.src = book.imageLink;
   bookImg.onclick = () => {
-    showBookModal(book);
+    if (!("ontouchstart" in window)) {
+      showBookModal(book);
+    }
   };
 
   const bookActions = document.createElement("div");
