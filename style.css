@@ -330,6 +330,13 @@ form h2:nth-of-type(2) {
   letter-spacing: 2px;
 }
 
+.btns button:disabled,
+.order-btn:disabled {
+  color: var(--grey-dark);
+  background-color: var(--grey-light);
+  cursor: default;
+}
+
 .btns button:hover,
 .order-btn:hover {
   color: var(--grey-dark);
@@ -683,3 +690,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-weight: bold;
   text-align: center;
 }
+
+/* Confirmation alert */
+
+/* Confirmation alert */
