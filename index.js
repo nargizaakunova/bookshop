@@ -284,6 +284,7 @@ function closeSidebarWindow() {
   if (sidebarWindow) {
     sidebarWindow.remove();
   }
+  document.removeEventListener("click", sidebarCloseHandler);
 }
 
 function isSidebarOpen() {
@@ -467,5 +468,16 @@ function renderSidebarWindow() {
     previousSidebar.replaceWith(createSidebarWindow(selectedBooks));
   } else {
     document.body.appendChild(createSidebarWindow(selectedBooks));
+  }
+  document.addEventListener("click", sidebarCloseHandler);
+}
+
+function sidebarCloseHandler(e) {
+  console.log("I was called");
+  if (
+    !e.target.closest(".shopping-cart") &&
+    !e.target.closest("#sidebar-window")
+  ) {
+    closeSidebarWindow();
   }
 }
