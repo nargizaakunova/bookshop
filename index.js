@@ -42,6 +42,15 @@ function createNav() {
 
   const shoppingCart = document.createElement("div");
   shoppingCart.classList.add("shopping-cart");
+  shoppingCart.ondrop = (e) => {
+    e.preventDefault();
+
+    const data = e.dataTransfer.getData("book");
+    addBook(JSON.parse(data));
+  };
+  shoppingCart.ondragover = (e) => {
+    e.preventDefault();
+  };
 
   const shoppingCartLink = document.createElement("a");
   shoppingCartLink.classList.add("cart");
@@ -123,6 +132,11 @@ function createBooksCatalog(items) {
 function createBookElement(book) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("book");
+
+  wrapper.draggable = true;
+  wrapper.ondragstart = (e) => {
+    e.dataTransfer.setData("book", JSON.stringify(book));
+  };
 
   // build book image
   const bookImgContainer = document.createElement("div");
@@ -374,10 +388,8 @@ function createSidebarWindow(selectedBooks) {
         for (let i = 0; i < itemsToAdd; i++) {
           selectedBooks.push(book);
         }
-        renderSidebarWindow();
       } else if (quantityNumber.value < quantity) {
         const itemsToRemove = quantity - quantityNumber.value;
-        console.log(itemsToRemove);
         let itemsRemoved = 0;
         for (let i = 0; i < selectedBooks.length; i++) {
           if (selectedBooks[i] === book) {
@@ -389,8 +401,9 @@ function createSidebarWindow(selectedBooks) {
             break;
           }
         }
-        renderSidebarWindow();
       }
+      renderSidebarWindow();
+      updateBagQuantity();
     };
 
     const stepUpBtn = document.createElement("button");
