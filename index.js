@@ -316,6 +316,16 @@ function createSidebarWindow(selectedBooks) {
   const sidebarWindow = document.createElement("div");
   sidebarWindow.id = "sidebar-window";
 
+  sidebarWindow.ondrop = (e) => {
+    e.preventDefault();
+
+    const data = e.dataTransfer.getData("book");
+    addBook(JSON.parse(data));
+  };
+  sidebarWindow.ondragover = (e) => {
+    e.preventDefault();
+  };
+
   const closeModalBtnLink = document.createElement("a");
   closeModalBtnLink.classList.add("close-sidebar-btn");
   closeModalBtnLink.onclick = (e) => {
